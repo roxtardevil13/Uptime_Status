@@ -1,0 +1,29 @@
+apiVersion: spinnaker.io/v1alpha2
+kind: SpinnakerService
+metadata:
+  name: spin
+  namespace: spinnaker
+spec:
+  spinnakerConfig:
+    config:
+      version: 1.32.0
+      persistentStorage:
+        persistentStoreType: s3
+        s3:
+          bucket: spinnaker
+          rootFolder: front50
+          accessKeyId: admin
+          secretAccessKey: admin12345
+          region: us-east-1
+          endpoint: http://minio.minio:9000
+          pathStyleAccess: true
+      security:
+        authn:
+          enabled: false
+        authz:
+          enabled: false
+    profiles: {}
+  expose:
+    type: service
+    service:
+      type: ClusterIP
