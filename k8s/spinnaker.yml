@@ -22,7 +22,17 @@ spec:
           enabled: false
         authz:
           enabled: false
-    profiles: {}
+    profiles:
+      deck:
+        settings-local.js: |
+          window.spinnakerSettings = window.spinnakerSettings || {};
+          // Make Deck call Gate on your local port-forward
+          window.spinnakerSettings.gateUrl = 'http://localhost:8084';
+      gate:
+        cors:
+          enabled: true
+          # Allow Deck on localhost:9000 to call Gate on localhost:8084
+          allowedOriginsPattern: '^http://localhost:9000$'
   expose:
     type: service
     service:
